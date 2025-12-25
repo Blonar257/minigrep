@@ -1,0 +1,10 @@
+Rust ist eine großartig moderne Programmiersprache.
+Rust bietet Speichersicherheit ohne Garbage Collection.
+Die Rust Community ist sehr freundlich und hilfsbereit.
+Rust wird immer beliebter in der Softwareentwicklung.
+Mit Rust können wir schnelle und sichere Programme schreiben.
+Rust hat ein starkes Type-System.
+Die Dokumentation von Rust ist ausgezeichnet.
+Viele Unternehmen nutzen Rust für ihre kritischen Systeme.
+Rust macht Programmieren spaßig und produktiv.
+Der Rust Compiler hilft uns, Fehler früh zu erkennen.
