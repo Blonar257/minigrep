@@ -6,7 +6,7 @@ use std::process;
 /// Ein einfaches Grep-ähnliches Tool zum Durchsuchen von Dateien
 #[derive(Parser, Debug)]
 #[command(name = "minigrep")]
-#[command(version = "0.1.0")]
+#[command(version = "0.1.5")]
 #[command(about = "Sucht nach einem Suchstring in einer Datei und gibt die Positionen zurück", long_about = None)]
 struct Argumente {
     /// Der zu suchende String
