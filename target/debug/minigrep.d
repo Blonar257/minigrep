@@ -1,1 +1,0 @@
-/home/blonar/Documents/Github/Rust/projects/minigrep/target/debug/minigrep: /home/blonar/Documents/Github/Rust/projects/minigrep/src/lib.rs /home/blonar/Documents/Github/Rust/projects/minigrep/src/main.rs

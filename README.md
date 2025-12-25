@@ -72,11 +72,10 @@ Zeigt 2 Zeilen vor und nach dem Treffer.
 
 #### 5. Mehrere Optionen kombinieren
 ```bash
-cargo run -- -i -n -C 1 "rust" test_datei.txt
+cargo run -- -i -C 1 "rust" test_datei.txt
 ```
 
 - `-i`: Case-insensitive
-- `-n`: Zeilennummern anzeigen
 - `-C 1`: 1 Kontextzeile anzeigen
 
 ## 📋 Optionen
@@ -85,7 +84,6 @@ cargo run -- -i -n -C 1 "rust" test_datei.txt
 |--------|----------|-------------|
 | `-i` | `--ignore-case` | Ignoriert Groß- und Kleinschreibung |
 | `-c` | `--count` | Zeigt nur die Anzahl der Treffer an |
-| `-n` | `--line-numbers` | Zeigt Zeilennummern an |
 | `-C <N>` | `--context <N>` | Zeigt N Kontextzeilen um Treffer an |
 | `-h` | `--help` | Zeigt Hilfe an |
 | `-V` | `--version` | Zeigt Version an |
@@ -95,13 +93,16 @@ cargo run -- -i -n -C 1 "rust" test_datei.txt
 Das Tool zeigt Suchergebnisse in folgendem Format:
 
 ```
-📋 Suchergebnisse für 'Rust' (insgesamt: 10 Treffer)
+📋 Suchergebnisse für 'Prog' (insgesamt: 3 Treffer)
 
-1. Zeile    1, Spalte   1: Rust ist eine großartig moderne Programmiersprache.
-            ^~~~
+Rust ist eine großartig moderne Programmiersprache.
+  → Zeile 1, Spalte 34
 
-2. Zeile    2, Spalte   1: Rust bietet Speichersicherheit ohne Garbage Collection.
-            ^~~~
+Mit Rust können wir schnelle und sichere Programme schreiben.
+  → Zeile 5, Spalte 43
+
+Rust macht Programmieren spaßig und produktiv.
+  → Zeile 9, Spalte 12
 
 ✅ Suche abgeschlossen!
 ```
@@ -109,7 +110,6 @@ Das Tool zeigt Suchergebnisse in folgendem Format:
 ### Erklärung der Ausgabe:
 - **Zeilennummer**: In welcher Zeile der Datei der Treffer gefunden wurde (1-basiert)
 - **Spaltennummer**: An welcher Position in der Zeile der Treffer beginnt (1-basiert)
-- **^~~~**: Visueller Indikator für die Position und Länge des Suchstrings
 
 ## 🏗️ Projektstruktur
 
@@ -137,78 +137,6 @@ minigrep/
 - Definiert `Suchkonfiguration` Struct
 - Implementiert `suche_case_sensitive()`
 - Implementiert `suche_case_insensitive()`
-- Enthält Unit-Tests
 
-## ✅ Tests
-
-Das Projekt enthält umfassende Unit-Tests:
-
-```bash
-cargo test
-```
-
-Tests prüfen:
-- ✅ Case-sensitive Suche funktioniert
-- ✅ Case-insensitive Suche funktioniert
-- ✅ Mehrere Vorkommen in einer Zeile werden gefunden
-- ✅ Korrekte Spaltennummern-Berechnung
-- ✅ Keine Treffer (leeres Ergebnis)
-
-## 🎨 Code-Highlight
-
-### Suchfunktion (vereinfacht)
-```rust
-fn suche_case_sensitive(inhalt: &str, suchmuster: &str) -> Result<Vec<Suchergebnis>> {
-    let mut ergebnisse = Vec::new();
-    
-    for (zeilenindex, zeile) in inhalt.lines().enumerate() {
-        let zeilennummer = zeilenindex + 1;
-        
-        // Alle Vorkommen des Musters finden
-        let mut start_position = 0;
-        while let Some(position) = zeile[start_position..].find(suchmuster) {
-            let absolute_position = start_position + position;
-            let spaltennummer = absolute_position + 1;
-            
-            ergebnisse.push(Suchergebnis {
-                zeilennummer,
-                spaltennummer,
-                zeileninhalt: zeile.to_string(),
-            });
-            
-            start_position = absolute_position + suchmuster.len();
-        }
-    }
-    
-    Ok(ergebnisse)
-}
-```
-
-## 🚀 Performance
-
-Das Tool ist optimiert für:
-- **Schnelle Suche**: Benutzt Rusts String-Matching
-- **Speichereffizienz**: Iteriert zeilenweise durch die Datei
-- **Fehlerbehandlung**: Gibt aussagekräftige Fehlermeldungen
-
-## 🔜 Mögliche Erweiterungen
-
-- [ ] Reguläre Ausdrücke (regex) unterstützen
-- [ ] Mehrere Dateien durchsuchen
-- [ ] Wildcard-Patterns
-- [ ] Farb-Ausgabe für Terminal
-- [ ] Export in verschiedene Formate (CSV, JSON)
-- [ ] Performance-Optimierungen für große Dateien
-- [ ] Rekursive Verzeichnis-Suche
-
-## 📝 Lizenz
-
-Dieses Projekt ist Open Source und frei verwendbar.
-
-## 👨‍💻 Autor
-
-Erstellt als Lernprojekt für Rust CLI-Entwicklung mit clap.
-
----
 
 **Viel Spaß beim Verwenden von minigrep!** 🎉
